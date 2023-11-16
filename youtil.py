@@ -5,7 +5,9 @@ youtil.py
 Helper utilities for downloading and processing Youtube videos
 
 # Example usage: ## TODO
-...
+- TODO: Add the ability to invoke on commandline and convert all files in current directory:
+`python ./youtil.py --batch-convert`
+
 """
 import datetime
 import glob
@@ -59,6 +61,7 @@ class Youtil:
         new_filename = new_filename.replace("]", "")
         new_filename = new_filename.replace(" - ", "-")
         new_filename = new_filename.replace(" – ", "-")
+        new_filename = new_filename.replace(" ", "")
 
         # Fixing Youtube video code
         new_filename = (
@@ -202,4 +205,7 @@ class Youtil:
 
 if __name__ == "__main__":
     yt = Youtil()
-    yt.download_video(url="https://www.youtube.com/shorts/TwWa-6hOo-8")
+    download_output = yt.download_video(url="https://www.youtube.com/watch?v=UYIAfiVGluk")
+    print(download_output)
+    convert_output = yt.convert_to_mp3(download_output["filename"])
+    print(convert_output)
